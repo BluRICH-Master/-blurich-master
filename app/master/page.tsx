@@ -47,7 +47,7 @@ export default function MasterPage() {
         return
       }
 
-      const fakeEmail = user.email
+      const fakeEmail = user.email || ''
       const phoneFromEmail = fakeEmail.replace('master_', '').replace('@blurich.ru', '')
       const formattedPhone = '+' + phoneFromEmail
 
@@ -121,7 +121,7 @@ export default function MasterPage() {
         return
       }
 
-      const fakeEmail = user.email
+      const fakeEmail = user.email || ''
       const { error: signInError } = await supabase.auth.signInWithPassword({
         email: fakeEmail,
         password: passwordForm.oldPassword,
