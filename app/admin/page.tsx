@@ -421,12 +421,12 @@ export default function AdminPage() {
   const openEditMaster = (master: any) => {
       setSelectedMaster(master)
       setMasterForm({
-          name: master.name, phone: master.phone,
+          name: master.name,
+          phone: master.phone,
           specialization: master.specialization,
           commission_percent: master.commission_percent || 30,
-        password: '',
-        login_phone: master.login_phone || '',
-    })
+          password: '',
+          login_phone: master.login_phone || '',
       })
       setIsMasterModalOpen(true)
   }
