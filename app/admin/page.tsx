@@ -423,7 +423,7 @@ export default function AdminPage() {
       setMasterForm({
           name: master.name, phone: master.phone,
           specialization: master.specialization,
-          commission_percent: master.commission_percent || 30,
+          commission_percent: master.commission_percent || 30,`n        password: '',
           login_phone: master.login_phone || ''
       })
       setIsMasterModalOpen(true)
