@@ -425,8 +425,8 @@ export default function AdminPage() {
           specialization: master.specialization,
           commission_percent: master.commission_percent || 30,
         password: '',
-        login_phone: master.login_phone || '',`n        password: '',
-          login_phone: master.login_phone || ''
+        login_phone: master.login_phone || '',
+    })
       })
       setIsMasterModalOpen(true)
   }
