@@ -37,14 +37,15 @@ export default function Home() {
             <p className="text-blue-100 text-lg">Учет квалификации, загрузки и эффективности специалистов</p>
           </div>
 
-          {/* Блок 3 */}
+          {/* Блок 3 — монета с рублём */}
           <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-6">
             <div className="w-16 h-16 bg-purple-500 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                <circle cx="12" cy="12" r="9" strokeWidth="2" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 7v10M9.5 10c0-1 1-1.5 2.5-1.5s2.5.5 2.5 1.5-1 1.5-2.5 1.5-2.5.5-2.5 1.5 1 1.5 2.5 1.5 2.5-.5 2.5-1.5" />
               </svg>
             </div>
-            <p className="text-blue-100 text-lg">Детальная статистика по выполненным работам и доходам</p>
+            <p className="text-blue-100 text-lg">Детальная статистика покажет где вы теряете деньги</p>
           </div>
 
           {/* Блок 4 — рукопожатие */}
