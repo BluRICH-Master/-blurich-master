@@ -6,5 +6,8 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   realtime: {
     autoReconnect: false,
+    params: {
+      eventsPerSecond: 0,
+    },
   },
 })
