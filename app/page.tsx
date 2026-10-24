@@ -51,15 +51,19 @@ export default function Home() {
           <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-6">
             <div className="w-16 h-16 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17a4 4 0 01-8 0V5a2 2 0 012-2h4a2 2 0 012 2v1m0 0h8m-8 0v1m8-1a4 4 0 008 0V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v1" />
               </svg>
             </div>
-            <p className="text-blue-100 text-lg">Подойдёт как для мастеров-одиночек, так и для компаний, где штат мастеров уже вырос</p>
+            <div className="text-blue-100 text-lg">
+              <div>Подойдёт</div>
+              <div>Мастерам-одиночкам</div>
+              <div>и Компаниям со штатом 20+</div>
+            </div>
           </div>
 
-          {/* Блок 5 — щит (надёжность) */}
+          {/* Блок 5 — щит зелёный */}
           <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-6">
-            <div className="w-16 h-16 bg-red-500 rounded-lg flex items-center justify-center flex-shrink-0">
+            <div className="w-16 h-16 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
@@ -67,7 +71,7 @@ export default function Home() {
             <p className="text-blue-100 text-lg">Работает стабильно и без сбоев каждый день</p>
           </div>
 
-          {/* Блок 6 — три строки */}
+          {/* Блок 6 */}
           <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-6">
             <div className="w-16 h-16 bg-yellow-500 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
