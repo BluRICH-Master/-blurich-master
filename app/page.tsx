@@ -37,12 +37,15 @@ export default function Home() {
             <p className="text-blue-100 text-lg">Учет квалификации, загрузки и эффективности специалистов</p>
           </div>
 
-          {/* Блок 3 — монета с рублём */}
+          {/* Блок 3 — рука с падающими монетами */}
           <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-6">
             <div className="w-16 h-16 bg-purple-500 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="9" strokeWidth="2" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 7v10M9.5 10c0-1 1-1.5 2.5-1.5s2.5.5 2.5 1.5-1 1.5-2.5 1.5-2.5.5-2.5 1.5 1 1.5 2.5 1.5 2.5-.5 2.5-1.5" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m2 16 6 6" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 4a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
               </svg>
             </div>
             <p className="text-blue-100 text-lg">Детальная статистика покажет где вы теряете деньги</p>
