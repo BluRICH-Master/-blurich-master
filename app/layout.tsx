@@ -1,5 +1,3 @@
-import './globals.css'
-
 export const metadata = {
   title: 'BluRICH Master',
   description: 'Система управления выездными мастерами',
