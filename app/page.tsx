@@ -51,7 +51,11 @@ export default function Home() {
           <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-6">
             <div className="w-16 h-16 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17a4 4 0 01-8 0V5a2 2 0 012-2h4a2 2 0 012 2v1m0 0h8m-8 0v1m8-1a4 4 0 008 0V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v1" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m11 17 2 2a1 1 0 1 0 3-3" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m21 3 1 11h-2" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4h8" />
               </svg>
             </div>
             <div className="text-blue-100 text-lg">
