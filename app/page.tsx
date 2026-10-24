@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-purple-800 flex flex-col items-center justify-center py-16 px-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-purple-800 flex flex-col items-center pt-24 pb-16 px-8">
       <div className="max-w-4xl w-full">
         {/* Заголовок */}
         <div className="text-center mb-16">
@@ -79,7 +79,7 @@ export default function Home() {
         </div>
 
         {/* Кнопки */}
-        <div className="flex gap-6 justify-center">
+        <div className="flex gap-6 justify-center mb-16">
           <Link
             href="/register"
             className="bg-green-600 text-white px-12 py-4 rounded-lg text-xl font-semibold hover:bg-green-700 transition-colors"
@@ -95,7 +95,7 @@ export default function Home() {
         </div>
 
         {/* Копирайт */}
-        <div className="text-center mt-16 text-blue-200 text-sm">
+        <div className="text-center text-blue-200 text-sm">
           © 2026 BluRICH-Master. Все права защищены.
         </div>
       </div>
