@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-purple-800 flex flex-col items-center py-12 px-8">
@@ -37,7 +35,7 @@ export default function Home() {
             <p className="text-blue-100 text-base">Учет квалификации, загрузки и эффективности специалистов</p>
           </div>
 
-          {/* Блок 3 — рука с падающими монетами */}
+          {/* Блок 3 */}
           <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-5">
             <div className="w-14 h-14 bg-purple-500 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,7 +49,7 @@ export default function Home() {
             <p className="text-blue-100 text-base">Детальная статистика покажет где вы теряете деньги</p>
           </div>
 
-          {/* Блок 4 — рукопожатие */}
+          {/* Блок 4 */}
           <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-5">
             <div className="w-14 h-14 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,7 +67,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Блок 5 — щит зелёный */}
+          {/* Блок 5 */}
           <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-5">
             <div className="w-14 h-14 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,20 +94,18 @@ export default function Home() {
 
         {/* Кнопки */}
         <div className="flex gap-6 justify-center mb-10">
-          <Link
+          <a
             href="/register"
-            prefetch={false}
             className="bg-green-600 text-white px-10 py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors"
           >
             Зарегистрироваться
-          </Link>
-          <Link
+          </a>
+          <a
             href="/login"
-            prefetch={false}
             className="bg-blue-600 text-white px-10 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors"
           >
             Войти
-          </Link>
+          </a>
         </div>
 
         {/* Копирайт */}
