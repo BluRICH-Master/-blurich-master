@@ -98,12 +98,14 @@ export default function Home() {
         <div className="flex gap-6 justify-center mb-10">
           <Link
             href="/register"
+            prefetch={false}
             className="bg-green-600 text-white px-10 py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors"
           >
             Зарегистрироваться
           </Link>
           <Link
             href="/login"
+            prefetch={false}
             className="bg-blue-600 text-white px-10 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors"
           >
             Войти
