@@ -111,8 +111,21 @@ export default function AdminPage() {
   useEffect(() => {
     if (companyId && ['dashboard', 'orders', 'masters', 'clients', 'services', 'inventory'].includes(activeTab)) { 
         fetchOrders(); fetchMasters(); fetchClients(); fetchServices(); fetchInventory();
+
+        // Realtime подписка на изменения заявок
+        const subscription = supabase
+          .channel('orders-changes')
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'orders', filter: `company_id=eq.${companyId}` }, (payload) => {
+            fetchOrders();
+          })
+          .subscribe();
+
+        return () => {
+          supabase.removeChannel(subscription);
+        };
     }
-    if (companyId && activeTab === 'settings') {
+        
+if (companyId && activeTab === 'settings') {
       loadSettings()
     }
     setIsSidebarOpen(false)
@@ -287,8 +300,9 @@ export default function AdminPage() {
         contact_phone: formData.client_phone, 
         contact_position: formData.client_position,
         client_id: clientId,
-        company_id: companyId
-    } : { ...formData, client_id: clientId, company_id: companyId }
+        company_id: companyId,
+    status: 'new'
+    } : { ...formData, client_id: clientId, company_id: companyId, status: 'new' }
     
     const { data: orderData, error } = await supabase.from('orders').insert([finalData]).select().single()
     
@@ -663,7 +677,7 @@ export default function AdminPage() {
                   <td className="px-4 md:px-6 py-3 md:py-4"><span className={`px-2 py-1 rounded-full text-xs ${statusBadge.color}`}>{statusBadge.label}</span></td>
                   <td className="px-4 md:px-6 py-3 md:py-4 flex gap-2">
                     <button onClick={() => openOrderDetails(o)} className="text-blue-600 hover:text-blue-800" title="Детали"><Icon name="eye" className="h-5 w-5"/></button>
-                    {o.status !== 'completed' && (
+                    {o.status === 'new' && (
                       <button onClick={() => { setSelectedOrder(o); setSelectedMasterId(o.master_id || ''); setIsAssignModalOpen(true) }} className="text-green-600 hover:text-green-800 font-medium text-xs">Назначить</button>
                     )}
                   </td>
