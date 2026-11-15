@@ -159,6 +159,18 @@ export default function MasterPage() {
     setPasswordLoading(false)
   }
 
+  const openViewModal = async (order: any) => {
+    setSelectedOrder(order)
+    setViewModalOpen(true)
+    setDetailsLoading(true)
+    try {
+      const { data: sv } = await supabase.from('order_services').select('*, services(name)').eq('order_id', order.id)
+      const { data: iv } = await supabase.from('order_inventory').select('*, inventory(name)').eq('order_id', order.id)
+      setOrderDetails({ services: sv || [], inventory: iv || [] })
+    } catch (e) { console.error('шибка загрузки деталей:', e) }
+    setDetailsLoading(false)
+  }
+
   const getStatusBadge = (status: string) => {
     const statusMap: Record<string, { label: string, color: string }> = {
       'new': { label: 'Новая', color: 'bg-yellow-100 text-yellow-800' },
