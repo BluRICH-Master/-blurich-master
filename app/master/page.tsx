@@ -380,6 +380,11 @@ export default function MasterPage() {
                           Принять в работу
                         </button>
                       )}
+                    {isInProgress && (
+                      <button onClick={() => router.push(`/master/orders/${order.id}`)} style={{ flex: 1, background: "#6366f1", color: "white", padding: "8px", borderRadius: "8px", fontWeight: "500", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+                        Редактировать
+                      </button>
+                    )}
                       {isInProgress && (
                         <button 
                           onClick={() => handleCompleteOrder(order.id)}
