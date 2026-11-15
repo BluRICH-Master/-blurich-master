@@ -204,7 +204,7 @@ export default function MasterPage() {
     
     const { error } = await supabase
       .from('orders')
-      .update({ status: 'in_progress' })
+      .update({ status: 'in_progress', master_accepted_at: new Date().toISOString() })
       .eq('id', orderId)
     
     if (error) {

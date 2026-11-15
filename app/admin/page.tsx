@@ -664,6 +664,7 @@ if (companyId && activeTab === 'settings') {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm min-w-[800px]">
               <thead className="bg-gray-50"><tr><th className="px-4 md:px-6 py-3">ID</th><th className="px-4 md:px-6 py-3">Организация</th><th className="px-4 md:px-6 py-3">Контакт</th><th className="px-4 md:px-6 py-3">Адрес</th><th className="px-4 md:px-6 py-3">Мастер</th><th className="px-4 md:px-6 py-3">Сумма</th><th className="px-4 md:px-6 py-3">Статус</th><th className="px-4 md:px-6 py-3">Действия</th></tr></thead>
+<th className="px-4 md:px-6 py-3">Дата</th>
               <tbody>{orders.map((o) => {
                 const statusBadge = getStatusBadge(o.status);
                 return (
@@ -675,6 +676,7 @@ if (companyId && activeTab === 'settings') {
                   <td className="px-4 md:px-6 py-3 md:py-4">{o.master_id ? masters.find(m => m.id == o.master_id)?.name || '-' : '-'}</td>
                   <td className="px-4 md:px-6 py-3 md:py-4 font-bold text-green-600">{o.total_amount || 0} ₽</td>
                   <td className="px-4 md:px-6 py-3 md:py-4"><span className={`px-2 py-1 rounded-full text-xs ${statusBadge.color}`}>{statusBadge.label}</span></td>
+                        <td className="px-4 md:px-6 py-3 text-xs text-gray-600">{new Date(o.created_at).toLocaleString('ru-RU', {day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'})}</td>
                   <td className="px-4 md:px-6 py-3 md:py-4 flex gap-2">
                     <button onClick={() => openOrderDetails(o)} className="text-blue-600 hover:text-blue-800" title="Детали"><Icon name="eye" className="h-5 w-5"/></button>
                     {o.status === 'new' && (
@@ -1139,6 +1141,15 @@ if (companyId && activeTab === 'settings') {
               <p className="text-sm text-gray-600"><strong>Адрес:</strong> {selectedOrder.address}</p>
               <p className="text-sm text-gray-600"><strong>Мастер:</strong> {selectedOrder.master_id ? masters.find(m => m.id == selectedOrder.master_id)?.name : 'Не назначен'}</p>
               <p className="text-sm text-gray-600"><strong>Статус:</strong> {getStatusBadge(selectedOrder.status).label}</p>
+                    <div className="mt-4 p-3 bg-gray-50 rounded-lg">
+                      <h4 className="text-sm font-bold text-gray-700 mb-2">История заявки</h4>
+                      <div className="space-y-1 text-xs">
+                        <div><span className='text-gray-500'>Создана:</span> {selectedOrder.created_at ? new Date(selectedOrder.created_at).toLocaleString('ru-RU') : '-'}</div>
+                        <div><span className='text-gray-500'>Назначена:</span> {selectedOrder.assigned_at ? new Date(selectedOrder.assigned_at).toLocaleString('ru-RU') : '-'}</div>
+                        <div><span className='text-gray-500'>Принята мастером:</span> {selectedOrder.master_accepted_at ? new Date(selectedOrder.master_accepted_at).toLocaleString('ru-RU') : '-'}</div>
+                        <div><span className='text-gray-500'>Завершена:</span> {selectedOrder.completed_at ? new Date(selectedOrder.completed_at).toLocaleString('ru-RU') : '-'}</div>
+                      </div>
+                    </div>
             </div>
             <hr className="my-4"/>
             
