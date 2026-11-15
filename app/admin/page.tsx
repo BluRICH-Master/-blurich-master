@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabaseClient'
@@ -336,7 +336,7 @@ if (companyId && activeTab === 'settings') {
   const handleAssignMaster = async () => {
     if (!selectedOrder || !selectedMasterId) return
     setLoading(true)
-    const { error } = await supabase.from('orders').update({ master_id: selectedMasterId, status: 'assigned' }).eq('id', selectedOrder.id)
+    const { error } = await supabase.from('orders').update({ master_id: selectedMasterId, status: 'assigned', assigned_at: new Date().toISOString() }).eq('id', selectedOrder.id)
     if (error) alert('Ошибка назначения: ' + error.message)
     else { 
         alert('Мастер назначен!'); 

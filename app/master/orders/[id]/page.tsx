@@ -111,6 +111,7 @@ export default function MasterOrderPage() {
     // бновляем заявку
     await supabase.from('orders').update({ 
       status: 'completed',
+    completed_at: new Date().toISOString(),
       master_earnings: earnings
     }).eq('id', orderId);
     loadData();

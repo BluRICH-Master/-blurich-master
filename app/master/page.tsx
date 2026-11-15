@@ -184,7 +184,7 @@ export default function MasterPage() {
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '-'
     const date = new Date(dateStr)
-    return date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' })
+    return date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })
   }
 
   const formatMoney = (amount: number) => {
@@ -228,6 +228,7 @@ export default function MasterPage() {
 
   const { error } = await supabase.from('orders').update({
     status: 'completed',
+    completed_at: new Date().toISOString(),
     master_earnings: earnings
   }).eq('id', orderId)
     
