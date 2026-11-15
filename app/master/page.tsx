@@ -218,10 +218,18 @@ export default function MasterPage() {
   const handleCompleteOrder = async (orderId: number) => {
     if (!confirm('Отметить заявку как исполненную?')) return
     
-    const { error } = await supabase
-      .from('orders')
-      .update({ status: 'completed' })
-      .eq('id', orderId)
+  const { data: order } = await supabase.from('orders').select('*').eq('id', orderId).single()
+  const { data: master } = await supabase.from('masters').select('commission_percent').eq('id', order.master_id).single()
+  const commissionPercent = master?.commission_percent || 60
+
+  const { data: svcs } = await supabase.from('order_services').select('*').eq('order_id', orderId)
+  const servicesTotal = (svcs || []).reduce((sum, s) => sum + ((s.price || 0) * (s.quantity || 1)), 0)
+  const earnings = servicesTotal * (commissionPercent / 100)
+
+  const { error } = await supabase.from('orders').update({
+    status: 'completed',
+    master_earnings: earnings
+  }).eq('id', orderId)
     
     if (error) {
       alert('Ошибка: ' + error.message)

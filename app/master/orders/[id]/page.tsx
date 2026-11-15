@@ -1,4 +1,4 @@
-﻿﻿﻿"use client";
+﻿﻿﻿﻿"use client";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
@@ -97,7 +97,22 @@ export default function MasterOrderPage() {
   };
 
   const completeOrder = async () => {
-    await supabase.from("orders").update({ status: "completed" }).eq("id", orderId);
+    // агружаем мастера для получения процента
+    const { data: master } = await supabase.from('masters').select('commission_percent').eq('id', order.master_id).single();
+    const commissionPercent = master?.commission_percent || 60;
+    
+    // Считаем сумму услуг
+    const { data: svcs } = await supabase.from('order_services').select('*').eq('order_id', orderId);
+    const servicesTotal = (svcs || []).reduce((sum, s) => sum + ((s.price || 0) * (s.quantity || 1)), 0);
+    
+    // Считаем 
+    const earnings = servicesTotal * (commissionPercent / 100);
+    
+    // бновляем заявку
+    await supabase.from('orders').update({ 
+      status: 'completed',
+      master_earnings: earnings
+    }).eq('id', orderId);
     loadData();
   };
 
