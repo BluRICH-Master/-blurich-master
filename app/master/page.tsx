@@ -344,7 +344,6 @@ export default function MasterPage() {
                         )}
                       </div>
                       <div style={{ textAlign: 'right' }}>
-                        <div style={{ fontWeight: 'bold', color: '#16a34a' }}>{order.total_amount || 0} ₽</div>
                         <div style={{ fontSize: '12px', color: '#6b7280' }}>{formatDate(order.created_at)}</div>
                       </div>
                     </div>
@@ -400,7 +399,6 @@ export default function MasterPage() {
                       <div style={{ fontSize: '12px', color: '#6b7280' }}>{formatDate(order.created_at)}</div>
                     </div>
                     <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontWeight: 'bold', color: '#16a34a' }}>{order.total_amount || 0} ₽</div>
                       <div style={{ fontSize: '12px', color: '#9333ea' }}>ЗП: {order.master_earnings || 0} ₽</div>
                     </div>
                   </div>
