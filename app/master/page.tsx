@@ -27,6 +27,11 @@ export default function MasterPage() {
   const [loading, setLoading] = useState(true)
   const [officePhone, setOfficePhone] = useState('')
   const [companyName, setCompanyName] = useState('')
+
+  const [viewModalOpen, setViewModalOpen] = useState(false)
+  const [selectedOrder, setSelectedOrder] = useState<any>(null)
+  const [orderDetails, setOrderDetails] = useState<any>({ services: [], inventory: [] })
+  const [detailsLoading, setDetailsLoading] = useState(false)
   
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false)
   const [passwordForm, setPasswordForm] = useState({ oldPassword: '', newPassword: '', confirmPassword: '' })
