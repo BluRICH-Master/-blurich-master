@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabaseClient'
@@ -80,8 +80,8 @@ export default function ReportsPage() {
   const masterStats = masters.map(master => {
     const masterOrders = filteredOrders.filter(o => o.master_id === master.id)
     const completedCount = masterOrders.length
-    const serviceRevenue = masterOrders.reduce((sum, o) => sum + (o.master_earnings || 0), 0)
     const commission = master.commission_percent || 30
+    const serviceRevenue = masterOrders.reduce((sum, o) => sum + ((o.master_earnings || 0) / (commission / 100)), 0)
     const calculatedPay = serviceRevenue * (commission / 100)
     
     return {
