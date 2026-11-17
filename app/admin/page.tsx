@@ -197,7 +197,7 @@ if (companyId && activeTab === 'settings') {
 
 const fetchFinancialState = async () => {
   if (!companyId) return
-  const { data, error } = await supabase.from('financial_state').select('*').eq('company_id', companyId).single()
+  const { data, error } = await supabase.from('financial_state').select('*').eq('company_id', companyId).eq('period', 'all').single()
   if (!error && data) setFinancialState(data)
 }
 
