@@ -968,6 +968,7 @@ const fetchFinancialState = async () => {
         </div>
         
         <header className="hidden md:block mb-8"><h2 className="text-2xl font-bold">{menuItems.find(i => i.id === activeTab)?.label}</h2></header>
+        <a href="/admin/finance" className="no-underline hover:opacity-80 transition-opacity cursor-pointer" title="Podrobnee">
   {financialState && financialState.current_status !== 'empty' && (
     <div className={`inline-flex items-center gap-2 ml-4 px-3 py-1 rounded-full text-sm font-medium ${
       financialState.current_status === 'critical' ? 'bg-red-100 text-red-800' :
@@ -976,9 +977,10 @@ const fetchFinancialState = async () => {
       'bg-purple-100 text-purple-800'
     }`}>
       <span className="text-lg">{financialState.current_status === 'critical' ? '🔴' : financialState.current_status === 'warning' ? '🟡' : financialState.current_status === 'normal' ? '🟢' : '🚀'}</span>
-      <span>Маржа: {financialState.current_margin}%</span>
+        <span>Маржа: {financialState.current_margin}%</span>
     </div>
   )}
+        </a>
         {renderContent()}
       </main>
 

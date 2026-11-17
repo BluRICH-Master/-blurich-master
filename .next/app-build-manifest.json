@@ -31,10 +31,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/admin/reports/page.js"
     ],
-    "/not-found": [
+    "/admin/finance/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/not-found.js"
+      "static/chunks/app/admin/finance/page.js"
     ]
   }
 }
