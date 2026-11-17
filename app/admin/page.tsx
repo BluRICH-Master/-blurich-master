@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabaseClient'
@@ -79,6 +79,7 @@ export default function AdminPage() {
   const [settingsForm, setSettingsForm] = useState({ office_phone: '', company_name: '' })
   const [settingsLoading, setSettingsLoading] = useState(false)
   const [settingsSaved, setSettingsSaved] = useState(false)
+const [financialState, setFinancialState] = useState<any>(null)
 
   const handleLogout = async () => { 
     localStorage.removeItem('company_id')
@@ -110,7 +111,7 @@ export default function AdminPage() {
 
   useEffect(() => {
     if (companyId && ['dashboard', 'orders', 'masters', 'clients', 'services', 'inventory'].includes(activeTab)) { 
-        fetchOrders(); fetchMasters(); fetchClients(); fetchServices(); fetchInventory();
+        fetchOrders(); fetchMasters(); fetchClients(); fetchServices(); fetchInventory(); fetchFinancialState();
 
         // Realtime подписка на изменения заявок
         const subscription = supabase
@@ -193,6 +194,12 @@ if (companyId && activeTab === 'settings') {
     const { data, error } = await supabase.from('inventory').select('*').eq('company_id', companyId).order('id', { ascending: false })
     if (!error && data) setInventory(data)
   }
+
+const fetchFinancialState = async () => {
+  if (!companyId) return
+  const { data, error } = await supabase.from('financial_state').select('*').eq('company_id', companyId).single()
+  if (!error && data) setFinancialState(data)
+}
 
   const loadSettings = async () => {
     if (!companyId) return
@@ -961,6 +968,17 @@ if (companyId && activeTab === 'settings') {
         </div>
         
         <header className="hidden md:block mb-8"><h2 className="text-2xl font-bold">{menuItems.find(i => i.id === activeTab)?.label}</h2></header>
+  {financialState && financialState.current_status !== 'empty' && (
+    <div className={`inline-flex items-center gap-2 ml-4 px-3 py-1 rounded-full text-sm font-medium ${
+      financialState.current_status === 'critical' ? 'bg-red-100 text-red-800' :
+      financialState.current_status === 'warning' ? 'bg-yellow-100 text-yellow-800' :
+      financialState.current_status === 'normal' ? 'bg-green-100 text-green-800' :
+      'bg-purple-100 text-purple-800'
+    }`}>
+      <span className="text-lg">{financialState.current_status === 'critical' ? '🔴' : financialState.current_status === 'warning' ? '🟡' : financialState.current_status === 'normal' ? '🟢' : '🚀'}</span>
+      <span>Маржа: {financialState.current_margin}%</span>
+    </div>
+  )}
         {renderContent()}
       </main>
 
