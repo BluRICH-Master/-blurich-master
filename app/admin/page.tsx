@@ -643,6 +643,7 @@ const fetchFinancialState = async () => {
     { id: 'inventory', label: 'Склад', icon: 'inventory' },
     { id: 'clients', label: 'Заказчики', icon: 'clients' },
     { id: 'reports', label: 'Отчёты', icon: 'reports', link: '/admin/reports' },
+    { id: 'expenses', label: 'Базовые расходы', icon: 'expenses', link: '/admin/expenses' },
     { id: 'admins', label: 'Администраторы', icon: 'user', link: '/admin/admins', ownerOnly: true },
     { id: 'settings', label: 'Настройки', icon: 'settings' },
   ]
