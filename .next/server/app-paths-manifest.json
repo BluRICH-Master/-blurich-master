@@ -1,7 +1,3 @@
 {
-  "/admin/reports/page": "app/admin/reports/page.js",
-  "/admin/expenses/page": "app/admin/expenses/page.js",
-  "/master/page": "app/master/page.js",
-  "/admin/page": "app/admin/page.js",
-  "/admin/finance/page": "app/admin/finance/page.js"
+  "/master/orders/[id]/page": "app/master/orders/[id]/page.js"
 }
