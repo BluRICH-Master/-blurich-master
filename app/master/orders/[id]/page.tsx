@@ -40,7 +40,7 @@ export default function MasterOrderPage() {
     setOrder(o);
     const { data: sv } = await supabase.from("order_services").select("*, services(name)").eq("order_id", orderId);
     setServices(sv || []);
-    const { data: iv } = await supabase.from("order_inventory").select("*, inventory(name, is_consumable)").eq("order_id", orderId);
+    const { data: iv } = await supabase.from("order_inventory").select("*, inventory(id, name, is_consumable, quantity)").eq("order_id", orderId);
     setInventory(iv || []);
     if (o?.company_id) {
       const { data: as2 } = await supabase.from("services").select("*").eq("company_id", o.company_id);
@@ -70,6 +70,7 @@ export default function MasterOrderPage() {
     if (!i) return;
     const { error } = await supabase.from("order_inventory").insert({ order_id: orderId, inventory_id: Number(selInvId), quantity: selInvQty, price: i.sale_price || 0, company_id: order.company_id });
     if (error) { alert("Error: " + error.message); return; }
+  await supabase.from("inventory").update({ quantity: i.quantity - selInvQty }).eq("id", Number(selInvId));
     const invTotal = (i.sale_price || 0) * selInvQty;
     const newTotal = (order.total_amount || 0) + invTotal;
     await supabase.from("orders").update({ total_amount: newTotal }).eq("id", orderId);
@@ -83,12 +84,14 @@ export default function MasterOrderPage() {
     if (!c) return;
     const { error } = await supabase.from("order_inventory").insert({ order_id: orderId, inventory_id: Number(selConsId), quantity: selConsQty, price: 0, company_id: order.company_id });
     if (error) { alert("Error: " + error.message); return; }
+  await supabase.from("inventory").update({ quantity: c.quantity - selConsQty }).eq("id", Number(selConsId));
     setShowConsModal(false); setSelConsId(""); setSelConsQty(1); setConsSearch("");
     loadData();
   };
 
   const remSvc = async (id: number) => {
     if (order?.status === "completed" || !order) return;
+  if (!confirm("Удалить услугу?")) return;
     const svc = services.find(s => s.id === id);
     if (svc) {
       const svcTotal = (svc.price || 0) * svc.quantity;
@@ -100,18 +103,24 @@ export default function MasterOrderPage() {
   };
 
   const remInv = async (id: number) => {
-    if (order?.status === "completed" || !order) return;
-    const inv = inventory.find(i => i.id === id);
-    if (inv) {
-      const invTotal = (inv.price || 0) * inv.quantity;
-      const newTotal = Math.max(0, (order.total_amount || 0) - invTotal);
-      await supabase.from("orders").update({ total_amount: newTotal }).eq("id", orderId);
+  if (order?.status === "completed" || !order) return;
+  if (!confirm("Удалить позицию?")) return;
+  const inv = inventory.find(i => i.id === id);
+  if (inv) {
+    const invTotal = (inv.price || 0) * inv.quantity;
+    const newTotal = Math.max(0, (order.total_amount || 0) - invTotal);
+    await supabase.from("orders").update({ total_amount: newTotal }).eq("id", orderId);
+    const { data: invData } = await supabase.from("inventory").select("quantity").eq("id", inv.inventory_id).single();
+    if (invData) {
+      const newQty = (invData.quantity || 0) + inv.quantity;
+      await supabase.from("inventory").update({ quantity: newQty }).eq("id", inv.inventory_id);
     }
-    await supabase.from("order_inventory").delete().eq("id", id);
-    loadData();
-  };
+  }
+  await supabase.from("order_inventory").delete().eq("id", id);
+  loadData();
+};
 
-  const reportBreakdown = async () => {
+const reportBreakdown = async () => {
     if (!breakdownDesc.trim() || !order) return;
     const { error } = await supabase.from("equipment_breakdowns").insert({
       order_id: orderId,
