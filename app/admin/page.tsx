@@ -55,6 +55,7 @@ export default function AdminPage() {
   const [services, setServices] = useState<any[]>([])
   const [inventory, setInventory] = useState<any[]>([])
   const [loading, setLoading] = useState(false)
+  const [breakdown, setBreakdown] = useState<any>(null)
   const router = useRouter()
   
   const [currentUserIsOwner, setCurrentUserIsOwner] = useState(false)
@@ -632,6 +633,8 @@ const fetchFinancialState = async () => {
       .eq('order_id', order.id)
     setOrderInventoryDetails(invData || [])
     
+    const { data: bd } = await supabase.from('equipment_breakdowns').select('*').eq('order_id', order.id).single()
+    setBreakdown(bd || null)
     setIsDetailsModalOpen(true)
   }
 
@@ -1172,6 +1175,13 @@ const fetchFinancialState = async () => {
                       </div>
                     </div>
             </div>
+            {breakdown && (
+              <div className="mt-4 p-3 bg-red-50 border-l-4 border-red-500 rounded-lg">
+                <h4 className="text-sm font-bold text-red-700 mb-2">⚠️ Уведомление о поломке</h4>
+                <p className="text-sm text-gray-700 mb-1"><strong>Описание:</strong> {breakdown.description}</p>
+                <p className="text-xs text-gray-500"><strong>Статус:</strong> {breakdown.status} | <strong>Дата:</strong> {new Date(breakdown.created_at).toLocaleString('ru-RU')}</p>
+              </div>
+            )}
             <hr className="my-4"/>
             
             <h4 className="font-bold mb-3">Услуги:</h4>
