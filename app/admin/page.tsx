@@ -553,6 +553,12 @@ const fetchFinancialState = async () => {
       setIsInventoryModalOpen(true)
   }
 
+  const openNewConsumable = () => {
+    setSelectedItem(null)
+    setInventoryForm({ name: '', category: '', purchase_price: 0, sale_price: 0, quantity: 0, min_quantity: 0, is_consumable: true })
+    setIsInventoryModalOpen(true)
+  }
+
   const openEditClient = (client: any) => {
       setSelectedClient(client)
       setClientForm({ name: client.name, phone: client.phone, address: client.address || '' })
@@ -780,7 +786,7 @@ const fetchFinancialState = async () => {
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
             <div className="p-4 md:p-6 border-b flex flex-col md:flex-row md:justify-between md:items-center gap-3">
                 <h3 className="text-lg font-bold">Склад</h3>
-                <button onClick={openNewInventory} className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm md:text-base">+ Добавить позицию</button>
+                <div className="flex gap-2"><button onClick={openNewInventory} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm md:text-base">+ Добавить материал</button><button onClick={openNewConsumable} className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 text-sm md:text-base">+ Добавить расходник</button></div>
             </div>
             {inventory.length === 0 ? <div className="p-12 text-center text-gray-500">Склад пуст</div> : (
                 <div className="overflow-x-auto">
