@@ -565,6 +565,12 @@ const fetchFinancialState = async () => {
       setIsClientModalOpen(true)
   }
 
+  const openNewClient = () => {
+    setSelectedClient(null)
+    setClientForm({ name: '', phone: '', address: '' })
+    setIsClientModalOpen(true)
+  }
+
   const handleSaveClient = async () => {
     setLoading(true)
     if (selectedClient) {
@@ -832,7 +838,7 @@ const fetchFinancialState = async () => {
     if (activeTab === 'clients') return (
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
             <div className="p-4 md:p-6 border-b">
-                <h3 className="text-lg font-bold">База заказчиков</h3>
+                <div className="flex justify-between items-center"><h3 className="text-lg font-bold">База заказчиков</h3><button onClick={openNewClient} className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm">+ Добавить клиента</button></div>
             </div>
             {clients.length === 0 ? <div className="p-12 text-center text-gray-500">Нет заказчиков</div> : (
                 <div className="overflow-x-auto">
